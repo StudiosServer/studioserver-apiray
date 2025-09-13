@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Anime";
+            const charTime = 50; // Tiempo en milisegundos entre cambios de caracteres
+            const revealTime = 50; // Tiempo en milisegundos entre revelación de caracteres
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duración del efecto glitch en milisegundos
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Studio Server  - Anime</title>
+      <link rel="canonical" href="/"/>
+      <meta property="og:description" content="Free Rest API for various purposes, token no required."/>
+      <meta property="og:image" content="https://i.pinimg.com/564x/29/0b/2a/290b2af0c1693a76c5019ca9be123fde.jpg"/>
+      <meta property="og:url" content=""/>
+
+      <meta name="keywords" content="">
+      <meta name="description" content="Free Rest API for various purposes, token no required.">
+      <meta name="author" content="Sareth">
+      <meta name="copyright" content="Copyright &copy; Sareth All Rights Reserved."/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+      <link href="./res/all.min2.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="/res/style-funtio.css">
+
+
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="/path/to/your/glitch-plugin.js"></script>
+
+
+
+
+      <style>.share-tech-mono-regular,
+         body {
+         font-family: "Share Tech Mono", monospace;
+         }
+         .share-tech-mono-regular {
+         font-weight: 400;
+         font-style: normal;
+         }
+         :root {
+         --bg-color: #fff;
+         --bg-img: url("/res/background.png");
+         --border-color: #fff;
+         }
+         body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100vh;
+         background-image: var(--bg-img);
+         background-attachment: fixed;
+         background-color: var(--bg-color);
+         }
+         #api-wrapper {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         }
+         #api-container {
+         width: 300px;
+         height: 428px;
+         padding: 20px;
+         font-size: 15px;
+         overflow: hidden;
+         overflow-y: auto;
+         border: 1px dashed #222;
+         position: relative;
+         }
+         #api-container::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+         background: 0 0;
+         }
+         #api-container .texto-inferior {
+         position: absolute;
+         bottom: 3px;
+         left: 0;
+         width: 100%;
+         text-align: center;
+         }
+         .table-wrapper {
+         max-height: 280px;
+         overflow-y: auto;
+         }
+         .table-api {
+         width: 100%;
+         border-collapse: collapse;
+         }
+         .table-api td,
+         .table-api th {
+         padding: 10px;
+         vertical-align: middle;
+         text-align: left;
+         }
+         .category-header {
+         font-weight: 700;
+         }
+         .circle {
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         display: inline-block;
+         margin-right: 6px;
+         animation: 1s infinite blink;
+         }
+         .ellipsis {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         padding-left: 30px !important;
+         }
+         .build-button {
+         padding: 6px 10px;
+         background-color: #eee;
+         color: #000000bd;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+         margin: 0 -10px;
+         transition: background-color 0.3s;
+         }
+         .build-button:hover {
+         color: #fff;
+         background-color: #353535;
+         }
+         @keyframes blink {
+         0%,
+         100% {
+         opacity: 0;
+         }
+         50% {
+         opacity: 1;
+         }
+         }
+         #fetching {
+         white-space: pre-line;
+         margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <center>
+         <div id="api-wrapper">
+            <div id="api-container">
+               <a href="/" style="text-decoration: none; color: black;">
+                  <center>
+                     <h1 id="header">ANIME</h1>
+                  </center>
+               </a>
+               <center>
+                  <p id="fetching">You can <b>search</b> simply by clicking the <b>Use</b> button.</p>
+               </center>
+               <td colspan="2">
+                  <hr style="border: 0px; border-top: 1px dashed #222;">
+               </td>
+               <div class="table-wrapper">
+                  <table class="table-api" cellspacing="0">
+                     <tbody>
+                        <tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Loli</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/loli">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Avatar</tt>
+                           </td>
+                           <td align="center">                                        
+                              <a href="/anime/avatar">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Blue Archive</tt>
+                           </td>
+                           <td align="center">                                        
+                              <a href="/anime/blue-archive">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Category</tt>
+                           </td>
+                           <td align="center">                                        
+                              <a href="/anime/category?query=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Loli Pc</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/lolipc">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Fox Girl</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/foxgril">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Neko</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/neko">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Ero</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/ero">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Waifu</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/waifu">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Maid</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/maid">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Selfie</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/selfie">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Oppai</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/oppai">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Mori Calliope</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/mori_calliope">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Marin Kitagawa</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/marin_kitagawa"">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Uniform</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/uniform">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>New Anime</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/newsanime">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Search Anime</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/anime?query=Naruto">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Anime Info</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/animeinfo?query=Death%20Note">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Anime Info (URL)</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/animeinfourl?query=https://myanimelist.net/anime/16870/The_Last__Naruto_the_Movie">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <!-- <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Video Hentai</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/videohentai?apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Buscar NHentai</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/nhentai?query=lisa&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Buscar Todo NHentai</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/allnhentai?query=lisa&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Hentai.tv</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/hentaitv?query=lisa&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr> -->
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Search Fandom</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/fandom?input=anime&query=onimai&limit=10">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Search Pixiv</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/anime/pixiv?query=lisa">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="texto-inferior">
+                  <td colspan="2">
+                     <hr style="border: 0px; border-top: 1px dashed #222;">
+                  </td>
+                  &copy; <span id="year"></span> <a href="/" style="text-decoration: none; color: black;"><b>Studio Server Developers</b>.</a>
+               </div>
+            </div>
+         </div>
+      </center>
+      
+      <script>
+         var year = document.getElementById("year");
+         var date = new Date().getFullYear();
+         year.textContent = date;
+      </script>
+      <script>
+         $(document).ready(function () {
+  $("#header").glitch({
+    chars: "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~",
+    charTime: 50,
+    finalText: "Studio Server Information",
+    done: function () {
+      console.log("Welcome!");
+    },
+  });
+});
+      </script>
+   </body>
+</html>
