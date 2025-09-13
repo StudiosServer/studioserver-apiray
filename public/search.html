@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Search";
+            const charTime = 50; // Time in milliseconds between character changes
+            const revealTime = 50; // Time in milliseconds between character revelations
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duration of glitch effect in milliseconds
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Studio Server  - Search</title>
+      <script src="./res/jquery-3.7.1.min2.js"></script>
+      <link rel="canonical" href="/"/>
+
+      <meta property="og:description" content="Free Rest API for various purposes, token no required."/>
+      <meta property="og:image" content="./res/404.jpg"/>
+      <meta property="og:url" content="StudiosServer"/>
+      <meta name="keywords" content="">
+      <meta name="description" content="Free Rest API for various purposes, token no required.">
+      <meta name="author" content="Sareth">
+      <meta name="copyright" content="Copyright &copy; Sareth All Rights Reserved."/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+      <link href="./res/all.min2.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="/res/style-funtio.css">
+
+
+
+      <style>.share-tech-mono-regular,
+         body {
+         font-family: "Share Tech Mono", monospace;
+         }
+         .share-tech-mono-regular {
+         font-weight: 400;
+         font-style: normal;
+         }
+         :root {
+         --bg-color: #fff;
+         --bg-img: url("/res/background.png");
+         --border-color: #fff;
+         }
+         body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100vh;
+         background-image: var(--bg-img);
+         background-attachment: fixed;
+         background-color: var(--bg-color);
+         }
+         #api-wrapper {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         }
+         #api-container {
+         width: 300px;
+         height: 428px;
+         padding: 20px;
+         font-size: 15px;
+         overflow: hidden;
+         overflow-y: auto;
+         border: 1px dashed #222;
+         position: relative;
+         }
+         #api-container::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+         background: 0 0;
+         }
+         #api-container .texto-inferior {
+         position: absolute;
+         bottom: 3px;
+         left: 0;
+         width: 100%;
+         text-align: center;
+         }
+         .table-wrapper {
+         max-height: 280px;
+         overflow-y: auto;
+         }
+         .table-api {
+         width: 100%;
+         border-collapse: collapse;
+         }
+         .table-api td,
+         .table-api th {
+         padding: 10px;
+         vertical-align: middle;
+         text-align: left;
+         }
+         .category-header {
+         font-weight: 700;
+         }
+         .circle {
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         display: inline-block;
+         margin-right: 6px;
+         animation: 1s infinite blink;
+         }
+         .ellipsis {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         padding-left: 30px !important;
+         }
+         .build-button {
+         padding: 6px 10px;
+         background-color: #eee;
+         color: #000000bd;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+         margin: 0 -10px;
+         transition: background-color 0.3s;
+         }
+         .build-button:hover {
+         color: #fff;
+         background-color: #353535;
+         }
+         @keyframes blink {
+         0%,
+         100% {
+         opacity: 0;
+         }
+         50% {
+         opacity: 1;
+         }
+         }
+         #fetching {
+         white-space: pre-line;
+         margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <center>
+         <div id="api-wrapper">
+            <div id="api-container">
+               <a href="/" style="text-decoration: none; color: black;">
+                  <center>
+                     <h1 id="header">SEARCH</h1>
+                  </center>
+               </a>
+               <center>
+                  <p id="fetching">You can <b>search</b> simply by clicking the <b>Use</b> button.
+               </center>
+               <td colspan="2">
+                  <hr style="border: 0px; border-top: 1px dashed #222;">
+               </td>
+               <div class="table-wrapper">
+                  <table class="table-api" cellspacing="0">
+                     <tbody>
+                        <tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="genius" class="circle color-true"></span>Genius</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/genius?query=Money">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="genius-letra" class="circle color-false"></span>Genius Lyrics</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/geniusletra?query=https://genius.com/Lisa-money-lyrics&parse=false">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="letras-search" class="circle color-false"></span>Lyrics Search</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/letra?query=Money lisa">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="tiktok-search" class="circle color-true"></span>TikTok Search</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/tiktok?query=Chaewoon">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="tiktok-search" class="circle color-true"></span>SouthPark Search</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/southpark?query=kenny&page=0">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="youtube-search" class="circle color-true"></span>YouTube Search</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/youtube?query=Twice">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="search-spotify" class="circle color-true"></span>Spotify Search</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/spotify?query=musica">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="spotify-playlist" class="circle color-true"></span>Spotify Playlist</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/spotifyplaylist?query=anime">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="spotify-album" class="circle color-true"></span>Spotify Album</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/spotifyalbum?query=gfriend&limit=3">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="youtube-music-search" class="circle color-true"></span>YouTube Music</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/searchtrack?query=Twice">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="youtube-music-album" class="circle color-true"></span>YouTube Music Album</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/ytsearchalbum?query=Twice">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="pokecard" class="circle color-true"></span>Pokecard</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/pokecard?query=caterpie">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="pinterest" class="circle color-true"></span>Pinterest</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/pinterest?query=Twice">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="apple-music" class="circle color-true"></span>Apple Music</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/applemusic?query=Feel%20special%20twice">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <!-- <tr>
+                           <td class="ellipsis">
+                              <tt><span id="rule-34-v2" class="circle color-true"></span>Rule 34</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/rule34?query=waifu&page=0&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="gelbooru" class="circle color-true"></span>Gelbooru</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/gelbooru?query=waifu&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="xnxx-search" class="circle color-true"></span>Xnxx</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/xnxx?query=Rusas&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr> -->
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="google-image" class="circle color-true"></span>Google Images</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/gimage?query=cats">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="google-search" class="circle color-true"></span>Google</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/google?query=onimai">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="google-academy" class="circle color-true"></span>Google Scholar</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/googleacademic?query=Twice kpop group&language=en">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wikipedia-search" class="circle color-true"></span>Wikipedia</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wikipedia?query=Twice&limit=10&page=1&language=es">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="yahoo-search" class="circle color-true"></span>Yahoo</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/yahoo?query=Chaewoon&language=en">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="movie-search" class="circle color-true"></span>Movie</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/movie?query=blackpink">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="bing-search" class="circle color-true"></span>Bing</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/bingsearch?query=blackpink">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="bing-image" class="circle color-true"></span>Bing Images</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/bingimage?query=blackpink">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="yts-movie" class="circle color-true"></span>Yts Movie</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/movieyts?search=blackpink">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="soundcloud" class="circle color-true"></span>SoundCloud</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/soundcloud?query=Twice&limit=10">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="deezer" class="circle color-true"></span>Deezer</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/deezer?query=Feel Special">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="tenor-search" class="circle color-true"></span>Tenor Gif</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/tenor?query=Nayeon">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="npmjs" class="circle color-true"></span>NpmJs</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/npm?query=axios&limit=20">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="app-store-search" class="circle color-true"></span>App Store</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/appstore?query=Whatsapp">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="play-store-search" class="circle color-true"></span>Play Store</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/playstore?query=Whatsapp">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wiki-search" class="circle color-true"></span>Wiki</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wiki?query=Lisa&language=en">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="cuevana-search" class="circle color-true"></span>Cuevana</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/cuevana?query=Blackpink">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="anilist-search" class="circle color-true"></span>Anilist</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/anilist?query=naruto">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="anime-search" class="circle color-true"></span>Anime</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/animesearch?query=naruto">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                         <tr>
+                           <td class="ellipsis">
+                              <tt><span id="manga-search" class="circle color-true"></span>Manga</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/mangasearch?query=naruto">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="serochan-search" class="circle color-true"></span>Zerochan</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/zerochan?query=loli">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="konachan-search" class="circle color-true"></span>Konachan</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/konachan?query=loli">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wallpapers-search" class="circle color-true"></span>Wallpapers</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wallpapers?query=Cars">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wallhaven-search" class="circle color-true"></span>Wallhaven</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wallhaven?query=house&page=1">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="unsplash-search" class="circle color-true"></span>Unsplash</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/unsplash?query=food">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="pixabay-search" class="circle color-true"></span>Pixabay</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/pixabay?query=nature">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wattpad-search" class="circle color-true"></span>Wattpad</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wattpad?query=lisa&limit=20">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="wattapad-details" class="circle color-true"></span>Wattpad Detalles</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/wattpaddetail?id=301234270">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="steam-search" class="circle color-true"></span>Steam</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/steam?query=Left 4 Dead">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span id="ani1-apk" class="circle color-true"></span>Ani1 Apk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/search/ani1?query=whatsapp">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="texto-inferior">
+                  <td colspan="2">
+                     <hr style="border: 0px; border-top: 1px dashed #222;">
+                  </td>
+                  &copy; <span id="year">0000</span> <a href="https://developer.studioserver.org/" style="text-decoration: none; color: black;"><b>Studio Server Developers</b>.</a>
+               </div>
+            </div>
+         </div>
+      </center>
+      
+      <!-- importan js in html -->
+       <script src="/status/spotify.js"></script>
+       <script src="/status/youtube.js"></script>
+       <script>
+         var year = document.getElementById("year");
+         var date = new Date().getFullYear();
+         year.textContent = date;
+      </script>
+   </body>
+</html>
