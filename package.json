@@ -1,0 +1,48 @@
+{
+  "name": "studioserver-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "postinstall": "npm install pm2 -g",
+    "intinstall": "npm install formidable@latest"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "axios": "^1.10.0",
+    "body-parser": "^1.20.3",
+    "cheerio": "^1.1.0",
+    "crypto": "^1.0.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "form-data": "^4.0.2",
+    "formidable": "^3.5.4",
+    "fs": "^0.0.1-security",
+    "jsdom": "^25.0.1",
+    "node-fetch": "^2.7.0",
+    "node-html-parser": "^7.0.1",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.9",
+    "path": "^0.12.7",
+    "progress": "^2.0.3",
+    "puppeteer": "^23.11.1",
+    "serve-favicon": "^2.5.0",
+    "sharp": "^0.34.3",
+    "socket.io": "^4.8.1",
+    "spotify-url-info": "^3.2.18",
+    "spotifydl-core": "^0.2.0",
+    "superagent": "^10.2.1",
+    "yt-search": "^2.13.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
