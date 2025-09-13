@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Page not found";
+            const charTime = 50; // Tiempo en milisegundos entre cambios de caracteres
+            const revealTime = 50; // Tiempo en milisegundos entre revelación de caracteres
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duración del efecto glitch en milisegundos
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/res/background.png');
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #c3c1c173
+        }
+        .container h1 {
+            color: #1d97e8;
+            margin-bottom: 20px;
+        }
+        .container p {
+            color: #35424a;
+        }
+        .container a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #1d5de8;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .container a:hover {
+            background-color: #35424a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="header">Page not found</h1>
+        <p>Page not found, return to home.</p>
+        <p>Are you lost?</p>
+        <a href="/">Return to Home</a>
+    </div>
+</body>
+</html>
