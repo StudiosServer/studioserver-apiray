@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Downloads";
+            const charTime = 50; // Time in milliseconds between character changes
+            const revealTime = 50; // Time in milliseconds between character revelations
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duration of glitch effect in milliseconds
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Studio Server  - Downloads</title>
+      <script src="./res/jquery-3.7.1.min2.js"></script>
+      <link rel="canonical" href="/"/>
+
+      <meta property="og:description" content="Free Rest API for various purposes, token no required."/>
+      <meta property="og:image" content="https://i.postimg.cc/RFrcFZFX/apiiimage.jpg"/>
+      <meta property="og:url" content=""/>
+      <meta name="keywords" content="">
+      <meta name="description" content="Free Rest API for various purposes, token no required.">
+      <meta name="author" content="Sareth">
+      <meta name="copyright" content="Copyright &copy; Sareth All Rights Reserved."/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+      <link href="./res/all.min2.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="/res/style-funtio.css">
+
+
+
+      <style>.share-tech-mono-regular,
+         body {
+         font-family: "Share Tech Mono", monospace;
+         }
+         .share-tech-mono-regular {
+         font-weight: 400;
+         font-style: normal;
+         }
+         :root {
+         --bg-color: #fff;
+         --bg-img: url('/res/background.png');
+         --border-color: #fff;
+         }
+         body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100vh;
+         background-image: var(--bg-img);
+         background-attachment: fixed;
+         background-color: var(--bg-color);
+         }
+         #api-wrapper {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         }
+         #api-container {
+         width: 300px;
+         height: 428px;
+         padding: 20px;
+         font-size: 15px;
+         overflow: hidden;
+         overflow-y: auto;
+         border: 1px dashed #222;
+         position: relative;
+         }
+         #api-container::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+         background: 0 0;
+         }
+         #api-container .texto-inferior {
+         position: absolute;
+         bottom: 3px;
+         left: 0;
+         width: 100%;
+         text-align: center;
+         }
+         .table-wrapper {
+         max-height: 280px;
+         overflow-y: auto;
+         }
+         .table-api {
+         width: 100%;
+         border-collapse: collapse;
+         }
+         .table-api td,
+         .table-api th {
+         padding: 10px;
+         vertical-align: middle;
+         text-align: left;
+         }
+         .category-header {
+         font-weight: 700;
+         }
+         .circle {
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         display: inline-block;
+         margin-right: 6px;
+         animation: 1s infinite blink;
+         }
+         .ellipsis {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         padding-left: 30px !important;
+         }
+         .build-button {
+         padding: 6px 10px;
+         background-color: #eee;
+         color: #000000bd;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+         margin: 0 -10px;
+         transition: background-color 0.3s;
+         }
+         .build-button:hover {
+         color: #fff;
+         background-color: #353535;
+         }
+         @keyframes blink {
+         0%,
+         100% {
+         opacity: 0;
+         }
+         50% {
+         opacity: 1;
+         }
+         }
+         #fetching {
+         white-space: pre-line;
+         margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <center>
+         <div id="api-wrapper">
+            <div id="api-container">
+               <a href="/" style="text-decoration: none; color: black;">
+                  <center>
+                     <h1 id="header">DOWNLOADS</h1>
+                  </center>
+               </a>
+               <center>
+                  <p id="fetching">You can <b>search</b> simply by clicking the <b>Use</b> button.
+               </center>
+               <td colspan="2">
+                  <hr style="border: 0px; border-top: 1px dashed #222;">
+               </td>
+               <div class="table-wrapper">
+                  <table class="table-api" cellspacing="0">
+                     <tbody>
+                        <tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>TikTok Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/tiktok?url=https://www.tiktok.com/@neqsil/video/7195723900792130822">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Pinterest Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/pinterest?url=https://pin.it/144tSikjY">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                         <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>X Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/x?query=https://x.com/godmitzu/status/1818617471579934928">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Instagram Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/instagram?query=https://www.instagram.com/p/C6goPSpyytx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Reddit Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/reddit?query=https://www.reddit.com/r/twice/comments/1glmww8/241107_elkie_instagram_update_tzuyu_and_gidle">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Spotify Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/spotify?query=https://open.spotify.com/track/37ZtpRBkHcaq6hHy0X98zn">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>ImgUr Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/imgur?query=https://imgur.com/gallery/art-gallery-ready-to-heist-free-dnd-ttrpg-maps-dTFUK1E">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Mediafire Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/mediafire?query=https://www.mediafire.com/folder/4zhvcue3l75xa/Studio Server+Test">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Youtube</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/youtube?query=https://youtu.be/TdrL3QxjyVw">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Spotify Playlist</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/spotifylist?query=https://open.spotify.com/playlist/37i9dQZF1DZ06evO4gtw7S">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Spotify Album</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/spotifyalbum?query=https://open.spotify.com/intl-es/album/22DL6IRGNYNenKej7aw8pO">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Threads Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/threads?query=https://www.threads.net/@momojypx/post/C52-OaTL3al">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Facebook Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/facebook?query=https://fb.watch/rOnqYjdiUo/">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>SoundCloud Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/soundcloud?query=https://soundcloud.com/twice-57013/one-spark">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Apple Music</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/applemusic?query=https://music.apple.com/es/album/guess-featuring-billie-eilish/1760420560?i=1760420750">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>GitHub Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/github?query=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Stickerly Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/stickerly?query=https://sticker.ly/s/4I2FC0">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <!-- <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Xnxx Download</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/xnxx?query=https://www.xnxx.com/video-l5hrrff/public_pick_ups&apikey=">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr> -->
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>PasteBin Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/pastebin?query=https://pastebin.com/kxrt4N4E">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>CapCut Downloads</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/download/capcut?query=https://www.capcut.com/t/Zs8kSeJ9h/">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="texto-inferior">
+                  <td colspan="2">
+                     <hr style="border: 0px; border-top: 1px dashed #222;">
+                  </td>
+                  &copy; <span id="year">0000</span> <a href="https://developer.studioserver.org/" style="text-decoration: none; color: black;"><b>Studio Server Developers</b>.</a>
+               </div>
+            </div>
+         </div>
+      </center>
+      
+      <script>
+         var year = document.getElementById("year");
+         var date = new Date().getFullYear();
+         year.textContent = date;
+      </script>
+   </body>
+</html>
