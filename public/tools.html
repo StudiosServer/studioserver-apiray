@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Tools";
+            const charTime = 50; // Time in milliseconds between character changes
+            const revealTime = 50; // Time in milliseconds between character revelations
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duration of glitch effect in milliseconds
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Studio Server  - Tools                 </title>
+      <script src="./res/jquery-3.7.1.min2.js"></script>
+      <link rel="canonical" href="/"/>
+
+      <meta property="og:description" content="Free Rest API for various purposes, token no required."/>
+      <meta property="og:image" content="https://i.pinimg.com/564x/29/0b/2a/290b2af0c1693a76c5019ca9be123fde.jpg"/>
+      <meta property="og:url" content=""/>
+      <meta name="keywords" content="">
+      <meta name="description" content="Free Rest API for various purposes, token no required.">
+      <meta name="author" content="Sareth">
+      <meta name="copyright" content="Copyright &copy; Sareth All Rights Reserved."/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+      <link href="./res/all.min2.css" rel="stylesheet">
+
+
+      <link rel="stylesheet" href="/res/style-funtio.css">
+
+
+
+      <style>.share-tech-mono-regular,
+         body {
+         font-family: "Share Tech Mono", monospace;
+         }
+         .share-tech-mono-regular {
+         font-weight: 400;
+         font-style: normal;
+         }
+         :root {
+         --bg-color: #fff;
+         --bg-img: url("/res/background.png");
+         --border-color: #fff;
+         }
+         body {
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100vh;
+         background-image: var(--bg-img);
+         background-attachment: fixed;
+         background-color: var(--bg-color);
+         }
+         #api-wrapper {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         }
+         #api-container {
+         width: 300px;
+         height: 428px;
+         padding: 20px;
+         font-size: 15px;
+         overflow: hidden;
+         overflow-y: auto;
+         border: 1px dashed #222;
+         position: relative;
+         }
+         #api-container::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+         background: 0 0;
+         }
+         #api-container .texto-inferior {
+         position: absolute;
+         bottom: 3px;
+         left: 0;
+         width: 100%;
+         text-align: center;
+         }
+         .table-wrapper {
+         max-height: 280px;
+         overflow-y: auto;
+         }
+         .table-api {
+         width: 100%;
+         border-collapse: collapse;
+         }
+         .table-api td,
+         .table-api th {
+         padding: 10px;
+         vertical-align: middle;
+         text-align: left;
+         }
+         .category-header {
+         font-weight: 700;
+         }
+         .circle {
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         display: inline-block;
+         margin-right: 6px;
+         animation: 1s infinite blink;
+         }
+         .ellipsis {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         padding-left: 30px !important;
+         }
+         .build-button {
+         padding: 6px 10px;
+         background-color: #eee;
+         color: #000000bd;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+         margin: 0 -10px;
+         transition: background-color 0.3s;
+         }
+         .build-button:hover {
+         color: #fff;
+         background-color: #353535;
+         }
+         @keyframes blink {
+         0%,
+         100% {
+         opacity: 0;
+         }
+         50% {
+         opacity: 1;
+         }
+         }
+         #fetching {
+         white-space: pre-line;
+         margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <center>
+         <div id="api-wrapper">
+            <div id="api-container">
+               <a href="/" style="text-decoration: none; color: black;">
+                  <center>
+                     <h1 id="header">TOOLS</h1>
+                  </center>
+               </a>
+               <center>
+                  <p id="fetching">You can <b>search</b> simply by clicking the <b>Use</b> button.
+               </center>
+               <td colspan="2">
+                  <hr style="border: 0px; border-top: 1px dashed #222;">
+               </td>
+               <div class="table-wrapper">
+                  <table class="table-api" cellspacing="0">
+                     <tbody>
+                        <tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>AI Image</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/iaimage?query=una chica anime">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>AI Ghibli</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/toghibli?imageUrl=https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/10/saya-nina-japonesa-virtual-que-parece-real_4.jpg?tf=1920x">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <tr>
+                              <td class="ellipsis">
+                                 <tt><span class="circle color-true"></span>Emoji Number</tt>
+                              </td>
+                              <td align="center">
+                                 <a href="/tools/country?query=34613288116">
+                                 <button class="build-button">Use</button>
+                                 </a>
+                              </td>
+                           </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Emojigraph</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/emoji?query=😁">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Telegram Channel</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/channelstalk?query=google">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Emoji Mix</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/mixed?emoji1=%F0%9F%98%9D&emoji2=%F0%9F%98%8A">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Flag Information</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/flaginfo?query=colombia">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>TikTok Stalk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/tiktokstalk?query=twice_tiktok_official">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Instagram Stalk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/igstalk?query=google">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Roblox Stalk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/robloxstalk?query=ashli2899&type=name">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Telegram Stalk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/telegramstalk?query=sandraxxx02">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Npm Stalk</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/npmstalk?query=delirius">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>WhatsApp Channel</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/whatsappchannelstalk?query=https://www.whatsapp.com/channel/0029VaOlQAT9sBIIBBUmZu3Q">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Pokemon Info</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/pokemon?query=charizard">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Google News</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/googlenews?language=es&country=PE">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Google Translate</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/translate?query=Hola, bienvenido a la api oficial de Studio Server Bot&language=en">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Google Tts</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/tts?query=Bienvenido%20a%20Delirius%20Api&language=ru&apikey=DkAJ1Lqs">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Simi</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/simi?query=Hola">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Mojito</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/mojito?query=%F0%9F%98%8E">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>WaBetaInfo News</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/wabetainfo">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>StickerPack</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/stickerpack?query=anime&page=1">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Apple NewRooms</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/applenewsroom?language=en">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Movistar Deportes</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/movistar">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>HTML Extract</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/htmlextract?query=https://google.com">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Check Url</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/checkurl?query=https://tinyurl.com/y54y4wvs">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Cdn Discord</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/cdn?query=https://i.postimg.cc/fWSq0Tsz/apitest.jpg&filename=Studio Server">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-pn"></span>Cdn Telegram</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/telegramorg?query=https://i.postimg.cc/fWSq0Tsz/apitest.jpg&filename=Studio Server">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Cdn Ibb</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/ibb?query=https://i.postimg.cc/nV33jgMb/kfko.jpg&filename=Dls">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Cdn PostImage</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/postimage?query=https://i.postimg.cc/nV33jgMb/kfko.jpg">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Emoji Discord</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/emojidc?query=cry">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Reddit Images</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/reddit?query=kpop,twice,bts,mamamoo,itzy">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>IP Info</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/ipinfo?query=8.8.8.8">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Stackoverflow Details</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/stackoverflowdetails?query=https://stackoverflow.com/questions/79115262/why-is-lldb-in-c-able-to-print-my-entire-data-structure-but-not-able-to-print">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Periodic Table</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/table?query=Magnesium">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>Boostrap</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/boostrap">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="ellipsis">
+                              <tt><span class="circle color-true"></span>El Comercio</tt>
+                           </td>
+                           <td align="center">
+                              <a href="/tools/elcomercio?query=castillo">
+                              <button class="build-button">Use</button>
+                              </a>
+                           </td>
+                        </tr>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="texto-inferior">
+                  <td colspan="2">
+                     <hr style="border: 0px; border-top: 1px dashed #222;">
+                  </td>
+                  &copy; <span id="year">0000</span> <a href="https://developer.studioserver.org/" style="text-decoration: none; color: black;"><b>Studio Server Developers</b>.</a>
+               </div>
+            </div>
+         </div>
+      </center>
+      
+      <script>
+         var year = document.getElementById("year");
+         var date = new Date().getFullYear();
+         year.textContent = date;
+      </script>
+   </body>
+</html>
