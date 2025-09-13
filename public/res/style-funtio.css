@@ -1,0 +1,16 @@
+/* color */
+.color-true{
+    background-color: green;
+}
+.color-false{
+    background-color: red;
+}
+.color-error{
+    background-color: blueviolet;
+ }
+ .color-developer{
+    background-color: blue;
+ }
+ .color-loading {
+    background-color: saddlebrown;
+}
