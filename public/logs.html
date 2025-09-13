@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Studio Server API - Changelog";
+            const charTime = 50; // Time in milliseconds between character changes
+            const revealTime = 50; // Time in milliseconds between character revelations
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duration of glitch effect in milliseconds
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+    <title> Studio Server - Changelog</title>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <meta name=theme-color content=#0E1525>
+    <meta name=keywords content="dls, delirius, api">
+    <meta name=description content="Changelog from Studio Server API.">
+    <link href="" rel=canonical>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta property=og:url content=/>
+    <meta property=og:image content="https://i.pinimg.com/736x/5b/4d/06/5b4d069f62213dc401f60cbffdd984a0.jpg">
+    <meta property=og:image:secure_url content="https://i.pinimg.com/736x/5b/4d/06/5b4d069f62213dc401f60cbffdd984a0.jpg">
+    <meta property=og:image:type content=image/jpeg>
+    <meta property=og:image:width content=500>
+    <meta property=og:image:height content=500>
+    <meta property=og:image:alt content="Studio Server">
+    <script src=./res/jquery-3.7.1.min2.js></script>
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css>
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js></script>
+    <link rel=preconnect href=https://fonts.googleapis.com>
+    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+
+        .content-wrapper,body,html {
+                                        height: 100%
+                                    }
+
+                        body{
+                          background-image: url('./res/background.png');
+                        }
+                        
+                                    body,html {
+                                        margin: 0;
+                                        overflow: hidden;
+                            font-family: 'JetBrains Mono', monospace;
+                                    }
+                        
+                                    .share-tech-mono-regular {
+                                        font-weight: 400;
+                                        font-style: normal
+                                    }
+                        
+                                    .scrollable-list {
+                                        max-height: 250px;
+                                        overflow-y: auto;
+                                        scrollbar-width: none
+                                    }
+                        
+                                    .scrollable-list::-webkit-scrollbar {
+                                        width: 0
+                                    }
+    </style>
+</head>
+
+<body class=share-tech-mono-regular>
+    <section class="min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="container content-wrapper">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-12">
+                    <div class=text-center>
+                        <h2 class=mb-1 id=header>Studio Server API Changelog</h2>
+                                                                                                <p class="text-muted">List of updates and changes for this <strong>API!</strong></p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-5">
+                    <div class="card p-2">
+                        <div class="list-group list-group-flush list-group-numbered scrollable-list">
+                                                                      <a href="/" class="list-group-item list-group-item-action"><strong>[update]</strong> Temporary data service</a>
+                            <a href="/ia/" class="list-group-item list-group-item-action"><strong>[update]</strong> Menu animation</a>
+                            <a href="/information" class="list-group-item list-group-item-action"><strong>[update]</strong> Transfer data </a>
+                            <a href="/" class="list-group-item list-group-item-action"><strong>[update]</strong> Studio Server API Menu</a>
+                            <a href="/" class="list-group-item list-group-item-action"><strong>[update]</strong> Server updated</a>
+                            <a href="/" class="list-group-item list-group-item-action"><strong>[update]</strong> Services update</a>
+                            <a href="/" class="list-group-item list-group-item-action"><strong>[update]</strong> Software Services</a>
+                            <a href="/download" class="list-group-item list-group-item-action"><strong>[update]</strong> API Added</a>
+                            <!--<a href="/download/reddit?url=https://www.reddit.com/r/twice/comments/1glmww8/241107_elkie_instagram_update_tzuyu_and_gidle" class="list-group-item list-group-item-action"><strong>[add]</strong> reddit download</a>
+                            <a href="/tools/postimage?image=https://i.postimg.cc/nV33jgMb/kfko.jpg" class="list-group-item list-group-item-action"><strong>[add]</strong> postimage</a>
+                            <a href="/canvas/patrick?url=https://i.postimg.cc/rm98D9dPii.jpg" class="list-group-item list-group-item-action"><strong>[add]</strong> patrick</a>
+                            <a href="/tools/table?element=Magnesium" class="list-group-item list-group-item-action"><strong>[add]</strong> periodic table</a>
+                            <a href="/download/spotifydlv3?url=https://open.spotify.com/track/37ZtpRBkHcaq6hHy0X98zn" class="list-group-item list-group-item-action"><strong>[add]</strong> spotifydl v3</a>
+                            <a href="/tools/reddit?query=kpop,twice,bts,mamamoo,itzy" class="list-group-item list-group-item-action"><strong>[add]</strong> reddit images</a>
+                            <a href="/tools/ibb?image=https://i.postimg.cc/nV33jgMb/kfko.jpg&filename=Dls" class="list-group-item list-group-item-action"><strong>[add]</strong> ibb upload</a>
+                            <a href="/download/capcut?url=" class="list-group-item list-group-item-action"><strong>[add]</strong> capcut download</a>
+                            <a href="/search/pixabay?query=nature" class="list-group-item list-group-item-action"><strong>[add]</strong> pixabay search</a>
+                            <a href="/canvas/quote?image=https://i.postimg.cc/Hk6hNCDw/quotedelirius.jpg&text=Welcome%20to%20the%20official%20Delirius%20API%20%F0%9F%98%88&footer=Sareth%20%F0%9F%98%A8" class="list-group-item list-group-item-action"><strong>[add]</strong> quoted message</a>
+                            <a href="/tools/stackoverflow?query=python%20modules" class="list-group-item list-group-item-action"><strong>[add]</strong> --&gt; stackoverflow search</a>
+                            <a href="/tools/stackoverflowdetails?url=https://stackoverflow.com/questions/79115262/why-is-lldb-in-c-able-to-print-my-entire-data-structure-but-not-able-to-print" class="list-group-item list-group-item-action"><strong>[add]</strong> -> stackoverflow details</a>
+                            <a href="/download/ytmp4?url=https://youtu.be/TdrL3QxjyVw" class="list-group-item list-group-item-action"><strong>[fix]</strong> ytmp4 & ytmp3 download</a>
+                            <a href="/tools/flaginfo?query=colombia" class="list-group-item list-group-item-action"><strong>[add]</strong> flag information</a>
+                            <a href="/search/wikipedia?query=twice&limit=10&page=1&language=es" class="list-group-item list-group-item-action"><strong>[add]</strong> wikipedia search</a>
+                            <a href="/download/pastebin?url=https://pastebin.com/kxrt4N4E" class="list-group-item list-group-item-action"><strong>[add]</strong> pastebin download</a>
+                            <a href="/tools/telegramorg?url=https://i.postimg.cc/fWSq0Tsztest.jpg&filename=Studio Server" class="list-group-item list-group-item-action"><strong>[add]</strong> telegram upload</a>
+                            <a href="/tools/whatsappchannelstalk?channel=https://www.whatsapp.com/channel/0029VaOlQAT9sBIIBBUmZu3Q" class="list-group-item list-group-item-action"><strong>[add]</strong> whatsapp channel stalk</a>
+                            <a href="/tools/telegramstalk?username=sandraxxx02" class="list-group-item list-group-item-action"><strong>[add]</strong> telegram stalk</a>
+                            <a href="/anime/hentaitv?query=lisa" class="list-group-item list-group-item-action"><strong>[add]</strong> hentai.tv search</a>
+                            <a href="/search/duckduckgo?query=Twice" class="list-group-item list-group-item-action"><strong>[add]</strong> duckduckgo search</a>
+                            <a href="/tools/movistar" class="list-group-item list-group-item-action"><strong>[add]</strong> movistar deportes</a>
+                            <a href="/canvas/tweet?name=Sareth&username=Studio Server&comment=Bienvenido a Studio Server API&image=https://i.pinimg.com/564x/0b/e5/e0/0be5e0454773bc191f0ac63cc7dc3950.jpg&theme=light" class="list-group-item list-group-item-action"><strong>[add]</strong> tweet message</a>
+                            <a href="/ia/hd?image=https://i.ibb.co/ZcPLKgK/darlyn-profile-programacion.jpg" class="list-group-item list-group-item-action"><strong>[add]</strong> hd image</a>
+                            <a href="/anime/wikia?fandom=marvel&query=deadpool&limit=3" class="list-group-item list-group-item-action"><strong>[add]</strong> fandom search</a>
+                            <a href="/search/steam?query=Left 4 Dead" class="list-group-item list-group-item-action"><strong>[add]</strong> steam</a>
+                            <a href="/tools/stickerpack?query=anime&page=1" class="list-group-item list-group-item-action"><strong>[add]</strong> stickerpack</a>
+                            <a href="/search/applemusicv2?query=Twice" class="list-group-item list-group-item-action"><strong>[add]</strong> apple music v2</a>
+                            <a href="/canvas/pokeview?query=charizard&view=true" class="list-group-item list-group-item-action"><strong>[add]</strong> pokemon view</a>
+                            <a href="/tools/pokemon?query=charizard" class="list-group-item list-group-item-action"><strong>[add]</strong> pokemon info</a>
+                            <a href="/tools/sswebpdf?url=https://github.com/delirius0" class="list-group-item list-group-item-action"><strong>[add]</strong> screenshot pdf</a>
+                            <a href="/search/yahoo?query=Chaewoon&language=en" class="list-group-item list-group-item-action"><strong>[add]</strong> yahoo search</a>
+                            <a href="/tools/ipinfo?ip=8.8.8.8" class="list-group-item list-group-item-action"><strong>[add]</strong> ip info</a>
+                            <a href="/tools/robloxstalk?username=ashli2899&type=name" class="list-group-item list-group-item-action"><strong>[add]</strong> roblox stalk</a>
+                            <a href="/download/twitterv2?url=https://x.com/godmitzu/status/1818617471579934928" class="list-group-item list-group-item-action"><strong>[update]</strong> x download</a>
+                            <a href="/download/instagram?url=https://www.instagram.com/p/C6goPSpyytx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" class="list-group-item list-group-item-action"><strong>[fix]</strong> instagram</a>
+                            <a href="/anime/animesearch?query=Naruto" class="list-group-item list-group-item-action"><strong>[info]</strong> anime & search</a>
+                            <a href="/search/pokecard?query=caterpie" class="list-group-item list-group-item-action"><strong>[add]</strong> pokecard</a>
+                            <a href="/download/apk?query=simcity" class="list-group-item list-group-item-action"><strong>[add]</strong> apk</a>
+                            <a href="/canvas/" class="list-group-item list-group-item-action"><strong>[add]</strong> canvas</a>
+                        </div> -->
+                    </div>
+                    <div class=row>
+                        <div class=col>
+                            <p>&nbsp;Changes: 8</p>
+                        </div>
+                        <div class=col>
+                            <p class=text-end>  Return to home <a href="/" class=text-decoration-none rel="noopener noreferrer"><strong>Here</strong></a> &nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        !(function (e) {
+                                  e.fn.glitch = function (t) {
+                            return this.each(function (a, s) {
+                              let r = e.extend(
+                                {
+                                  chars: "!<>-_\\/[]{}—=+*^?#________",
+                                  charTime: 10,
+                                  finalText: void 0,
+                                  done: function () {
+                                    console.log("Ready");
+                                  },
+                                },
+                                t,
+                              );
+                              e.Deferred(), (s = e(s)).text();
+                              let n = new ((function () {
+                                let t = {};
+                                function a(e, a) {
+                                  void 0 === a && (t.chars = r.chars),
+                                    (t.element = e),
+                                    (t.originalText = r.finalText || e.text()),
+                                    (t.scrambledText = (function e() {
+                                      let a = [];
+                                      for (var s = 0; s < t.originalText.length; s++) a.push(n());
+                                      return a;
+                                    })());
+                                }
+                                function n() {
+                                  return t.chars[Math.floor(Math.random() * t.chars.length)];
+                                }
+                                function o(e, t, a) {
+                                  return t > e.length - 1 ? e : e.substr(0, t) + a + e.substr(t + 1);
+                                }
+                                function l(a) {
+                                  let s = e.Deferred(),
+                                    l = Math.floor(2 * Math.random()) + r.charTime,
+                                    i = setInterval(
+                                      function () {
+                                        0 === l
+                                          ? (clearInterval(i),
+                                            s.resolve(),
+                                            t.element.text(
+                                              o(t.element.text(), a, t.originalText.charAt(a)),
+                                            ))
+                                          : (t.element.text(o(t.element.text(), a, n())), l--);
+                                      },
+                                      Math.floor(40 * Math.random()) + 10,
+                                    );
+                                  return s.promise();
+                                }
+                                return (
+                                  (a.prototype.getScrambledText = function () {
+                                    return t.scrambledText.join("");
+                                  }),
+                                  (a.prototype.animate = function () {
+                                    let t = e.Deferred(),
+                                      a = [];
+                                    for (var r = 0; r < s.text().length; r++) a.push(l(r));
+                                    return (
+                                      Promise.all(a).then(function () {
+                                        t.resolve();
+                                      }),
+                                      t.promise()
+                                    );
+                                  }),
+                                  a
+                                );
+                              })())(s);
+                              s.text(n.getScrambledText()),
+                                n.animate().then(function () {
+                                  r.done(s);
+                                });
+                            });
+                          };
+                        })(jQuery);
+                        $(document).ready(function () {
+                          $("#header").glitch({
+                            chars: "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~",
+                            charTime: 50,
+                            finalText: "Studio Server - Changelog",
+                            done: function () {
+                              console.log("Welcome to Studio Server API!");
+                            },
+                          });
+                        });
+    </script>
+</body>
+
+</html>
