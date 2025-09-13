@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const chars = "!@#<>$%^&*()-_=+[]{}|;:,.<>?`~";
+            const finalText = "Studio server API information";
+            const charTime = 50; // Time in milliseconds between character changes
+            const revealTime = 50; // Time in milliseconds between character revelations
+            let glitching = true;
+            const originalText = finalText.split('');
+            const length = originalText.length;
+            const halfLength = Math.ceil(length / 2);
+
+            function getRandomChar() {
+                return chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            function glitchText(element, finalText, charTime, revealTime) {
+                let glitchInterval = setInterval(() => {
+                    let newText = originalText.map((char, i) => {
+                        return glitching && Math.random() > 0.5 ? getRandomChar() : char;
+                    }).join('');
+                    element.innerText = newText;
+                }, charTime);
+
+                setTimeout(() => {
+                    clearInterval(glitchInterval);
+                    glitching = false;
+                    let revealStep = 0;
+                    let revealInterval = setInterval(() => {
+                        if (revealStep > halfLength) {
+                            clearInterval(revealInterval);
+                            element.innerText = finalText;
+                            console.log("Welcome to Studio Server API!");
+                            return;
+                        }
+                        let revealedText = originalText.map((char, i) => {
+                            if (i < revealStep || i >= length - revealStep) {
+                                return char;
+                            }
+                            return getRandomChar();
+                        }).join('');
+                        element.innerText = revealedText;
+                        revealStep++;
+                    }, revealTime);
+                }, 2000); // Duration of glitch effect in milliseconds
+            }
+
+            glitchText(header, finalText, charTime, revealTime);
+        });
+    </script>
+      <link rel="shortcut icon" href="/res/favicon.png" type="image/png">
+    <title> Studio Server | API Information</title>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <link rel="canonical" href="/" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:description" content="FREE API by Studio Server Developers" />
+    <meta property="og:image" content="https://i.postimg.cc/RFrcFZFX/apiiimage.jpg" />
+    <meta property="og:url" content="/" />
+    <meta name="keywords" content="">
+    <meta name="description" content="Free Rest API for various purposes, apikey no required.">
+    <meta name="author" content="Sareth">
+    <meta name="copyright" content="Copyright &copy; Studio Server All Rights Reserved." />
+    <link rel=preconnect href=https://fonts.googleapis.com>
+    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel=stylesheet>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./informations/script.js"></script>
+    <link rel="stylesheet" href="./informations/style1.css">
+    <style>
+        .dropdown-menu__labels {
+         height: 75px
+         }
+         body{
+            background-image: url('./res/background.png');
+         }
+    </style>
+</head>
+
+<body>
+    <div class=container>
+        <header>
+            <table class=navigator>
+                <th>
+                    <h1>
+                     <a href=/ title="Studio Server API">
+                     <span id=header>Studio Server | Information</span>
+                     </a>
+                  </h1>
+                </th>
+                </th>
+            </table>
+        </header>
+        <div class=grid>
+            <div class=col-6_sm-12>
+                <div class=boxed>
+                    <table class=stats>
+                        <td>
+                            <?xml
+                           version="1.0" encoding="iso-8859-1"?>
+                                <svg fill=#EFDF0D height=80px width=80px version=1.1 id=Layer_1 xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink viewBox="0 0 512.002 512.002" xml:space=preserve>
+                                    <g>
+                                        <g>
+                                            <path d="M437.333,213.334c5.888,0,10.667-4.779,10.667-10.667v-128c0-29.397-23.915-53.333-53.333-53.333H53.333
+                                    C23.915,21.334,0,45.271,0,74.668v362.667c0,29.397,23.915,53.333,53.333,53.333h341.333c29.419,0,53.333-23.936,53.333-53.333
+                                    v-64c0-5.888-4.779-10.667-10.667-10.667c-5.888,0-10.667,4.779-10.667,10.667v64c0,17.643-14.357,32-32,32H53.333
+                                    c-17.643,0-32-14.357-32-32V128.001h405.333v74.667C426.667,208.556,431.445,213.334,437.333,213.334z M21.333,106.668v-32
+                                    c0-17.643,14.357-32,32-32h341.333c17.643,0,32,14.357,32,32v32H21.333z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <circle cx=53.333 cy=74.668 r=10.667/>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <circle cx=96 cy=74.668 r=10.667/>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <circle cx=138.667 cy=74.668 r=10.667/>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M117.333,234.668c-5.888,0-10.667,4.779-10.667,10.667v32H64v-32c0-5.888-4.779-10.667-10.667-10.667
+                                    s-10.667,4.779-10.667,10.667v85.333c0,5.888,4.779,10.667,10.667,10.667S64,336.556,64,330.668v-32h42.667v32
+                                    c0,5.888,4.779,10.667,10.667,10.667S128,336.556,128,330.668v-85.333C128,239.446,123.221,234.668,117.333,234.668z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M202.667,234.668H160c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667h10.667v74.667
+                                    c0,5.888,4.779,10.667,10.667,10.667S192,336.556,192,330.668v-74.667h10.667c5.888,0,10.667-4.779,10.667-10.667
+                                    S208.555,234.668,202.667,234.668z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M288,234.668h-42.667c-5.888,0-10.667,4.779-10.667,10.667s4.779,10.667,10.667,10.667H256v74.667
+                                    c0,5.888,4.779,10.667,10.667,10.667s10.667-4.779,10.667-10.667v-74.667H288c5.888,0,10.667-4.779,10.667-10.667
+                                    S293.888,234.668,288,234.668z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M352,234.668h-21.333c-5.888,0-10.667,4.779-10.667,10.667v85.333c0,5.888,4.779,10.667,10.667,10.667
+                                    s10.667-4.779,10.667-10.667v-32H352c17.643,0,32-14.357,32-32C384,249.025,369.643,234.668,352,234.668z M352,277.334h-10.667
+                                    v-21.333H352c5.867,0,10.667,4.779,10.667,10.667S357.867,277.334,352,277.334z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M503.915,234.988c-5.803-1.493-11.52,2.027-12.928,7.765l-21.333,85.333c-1.429,5.717,2.027,11.499,7.765,12.928
+                                    c0.875,0.213,1.728,0.32,2.581,0.32c4.8,0,9.152-3.221,10.347-8.085l21.333-85.333
+                                    C513.109,242.198,509.653,236.417,503.915,234.988z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path d="M461.248,234.988c-5.824-1.493-11.52,2.027-12.928,7.765l-21.333,85.333c-1.429,5.717,2.027,11.499,7.765,12.928
+                                    c0.875,0.213,1.728,0.32,2.581,0.32c4.8,0,9.152-3.221,10.347-8.085l21.333-85.333
+                                    C470.443,242.198,466.987,236.417,461.248,234.988z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <circle cx=416 cy=266.668 r=10.667/>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <circle cx=416 cy=309.335 r=10.667/>
+                                        </g>
+                                    </g>
+                                </svg>
+                        </td>
+                        <td>
+                            <h1>Requests</h1>
+                            <span class="countuss" id="rrspedi">Loading...</span>
+                            <br>
+                            <span class="last-data" id="currentDateTime">Loading...</span>
+                        </td>
+                    </table>
+                </div>
+            </div>
+            <div class=col-6_sm-12>
+                <div class=boxed>
+                    <table class=stats>
+                        <td>
+                            <?xml
+                           version="1.0" encoding="iso-8859-1"?>
+                                <svg fill=#EFDF0D height=80px width=80px version=1.1 id=visitor xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink viewBox="0 0 512 512" xml:space=preserve>
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <path d="M147.583,257.358c23.308,0,42.272-18.93,42.272-42.196s-18.962-42.196-42.272-42.196
+                                       c-23.309,0-42.272,18.929-42.272,42.196S124.275,257.358,147.583,257.358z M147.583,189.133
+                                       c14.393,0,26.102,11.677,26.102,26.028c0,14.352-11.709,26.028-26.102,26.028s-26.102-11.677-26.102-26.028
+                                       C121.481,200.81,133.19,189.133,147.583,189.133z" />
+                                                <path d="M435.663,207.557H421.46v-41.03c0-34.599-28.149-62.749-62.75-62.749h-7.883c-34.6,0-62.75,28.149-62.75,62.749v41.03
+                                       h-2.646c-4.465,0-8.084,3.62-8.084,8.084c0,4.465,3.62,8.084,8.084,8.084h150.23c4.465,0,8.084-3.62,8.084-8.084
+                                       C443.747,211.177,440.127,207.557,435.663,207.557z M405.292,207.557H304.247v-41.03c0-25.684,20.896-46.58,46.581-46.58h7.883
+                                       c25.685,0,46.581,20.896,46.581,46.58V207.557z" />
+                                                <path d="M511.863,247.335c-7.547-79.902-49.526-151.694-115.453-197.85c0.415-2.368,0.631-4.804,0.631-7.289
+                                       C397.04,18.93,378.078,0,354.77,0c-12.139,0-23.1,5.135-30.817,13.342c-19.031-6.173-38.759-10.248-58.731-12.126
+                                       c-8.71-0.819-17.434,2.091-23.912,7.989c-6.473,5.893-10.186,14.287-10.186,23.032v2.488
+                                       c-60.86,2.004-117.786,26.601-161.055,69.775C24.884,149.587,0,209.533,0,273.296s24.884,123.71,70.069,168.795
+                                       C115.249,487.173,175.316,512,239.208,512c63.891,0,123.96-24.827,169.139-69.908c43.27-43.176,67.923-99.977,69.935-160.711
+                                       h2.511c8.779,0,17.202-3.722,23.108-10.212C509.782,264.706,512.683,256.019,511.863,247.335z M354.77,16.168
+                                       c14.393,0,26.102,11.677,26.102,26.028c0,2.784-0.441,5.467-1.257,7.985c-0.057,0.156-0.11,0.314-0.157,0.471
+                                       c-3.528,10.214-13.263,17.572-24.689,17.572c-14.393,0-26.102-11.676-26.102-26.028S340.377,16.168,354.77,16.168z
+                                       M239.208,495.832c-122.985,0-223.039-99.829-223.039-222.536c0-120.003,95.705-218.125,214.955-222.391v199.329
+                                       c0,17.174,13.994,31.147,31.196,31.147h199.781C457.826,400.36,359.482,495.832,239.208,495.832z M491.943,260.287
+                                       c-2.89,3.177-6.85,4.925-11.149,4.925H262.32c-8.287,0-15.028-6.719-15.028-14.978V42.677V32.238
+                                       c0-4.265,1.741-8.198,4.901-11.075c3.166-2.881,7.253-4.249,11.514-3.847c17.455,1.642,34.715,5.066,51.43,10.199
+                                       c-1.706,4.575-2.639,9.522-2.639,14.683c0,23.267,18.962,42.196,42.272,42.196c14.901,0,28.025-7.735,35.555-19.396
+                                       c60.2,43.494,98.465,109.995,105.442,183.858C496.166,253.079,494.808,257.138,491.943,260.287z" />
+                                                <path d="M228.477,380.522h-14.202v-41.03c0-34.6-28.149-62.749-62.75-62.749h-7.883c-34.6,0-62.75,28.149-62.75,62.749v41.03
+                                       h-2.646c-4.465,0-8.084,3.62-8.084,8.084c0,4.465,3.62,8.084,8.084,8.084h150.231c4.465,0,8.084-3.62,8.084-8.084
+                                       C236.561,384.141,232.942,380.522,228.477,380.522z M198.106,380.522H97.061v-41.03c0-25.685,20.896-46.58,46.581-46.58h7.883
+                                       c25.685,0,46.581,20.896,46.581,46.58V380.522z" />
+                                                <path d="M469.505,207.557h-1.156c-4.465,0-8.084,3.62-8.084,8.084c0,4.465,3.62,8.084,8.084,8.084h1.156
+                                       c4.465,0,8.084-3.62,8.084-8.084C477.589,211.177,473.97,207.557,469.505,207.557z" />
+                                                <path d="M261.164,380.522c-4.465,0-8.084,3.62-8.084,8.084c0,4.465,3.62,8.084,8.084,8.084h1.156c4.465,0,8.084-3.62,8.084-8.084
+                                       c0-4.465-3.62-8.084-8.084-8.084H261.164z" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                        </td>
+                        <td>
+                            <h1>Visitors</h1>
+                            <span class="count" id="visitorCount">Not available</span>
+                            <br>
+                            <span class="last-data" id="lastVisitorTime">Loading...</span>
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class=grid>
+            <div class=col-7_sm-12>
+                <div class="boxed pd-20">
+                    <div class="boxed pd-20">
+                        <h3 class="head-title">Monitor</h3>
+                        <table class="table-info" cellspacing="5">
+                            <tbody>
+                                <tr>
+                                    <td><b>Platform</b></td>
+                                    <td>:</td>
+                                    <td><span id="platform">loading...</span></td>
+                                </tr>
+                                <tr>
+                                    <td><b>CPU Usage</b></td>
+                                    <td>:</td>
+                                    <td><span id="cpu">loading...</span></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Memory</b></td>
+                                    <td>:</td>
+                                    <td><span id="RAMuse">loading...</span> / <span id="RAMtotal">loading...</span></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Runtime</b></td>
+                                    <td>:</td>
+                                    <td><span id="runtime">loading...</span></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Processor</b></td>
+                                    <td>:</td>
+                                    <td><span id="processor">loading...</span></td>
+                                </tr>
+                                <tr>
+                                <td><b>Region</b></td>
+                                <td>:</td>
+                                <td><span id="region">loading...</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="boxed pd-20" bis_skin_checked="1">
+                        <h3 class="head-title">Information</h3>
+                        <div class="alert alert-info" bis_skin_checked="1"><b>Studio Server API!</b>
+                            <p><b>- </b>Liz ILami</p>
+                            <p><b>- </b>Lumine</p>
+                            <p><b>- </b>José Ángel</p>
+                            <h5>Thanks to the developers</h5>
+                        </div>
+                        <h4>Using Server (Studio Server Developers)</h4>
+                        <!-- <iframe id="i2" src="" bis_size="{&quot;x&quot;:587,&quot;y&quot;:618,&quot;w&quot;:400,&quot;h&quot;:250,&quot;abs_x&quot;:587,&quot;abs_y&quot;:618}" bis_id="fr_xvkp9xfm4h9ny02038wbgx" bis_depth="0" bis_chainid="2"> -->
+                        </iframe>
+                </div>
+                    <div class="report" id="tr" bis_skin_checked="1">English version</div>
+                </div>
+            </div>
+            <div class=col-5_sm-12>
+                <div class="boxed pd-20">
+                    <h3 class=head-title>Developer</h3>
+                    <div class=dev>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class=ic>
+                                        <?xml
+                                    version="1.0" encoding="utf-8"?>
+                                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.0744 2.9938C4.13263 1.96371 4.37869 1.51577 5.08432 1.15606C5.84357 0.768899 7.04106 0.949072 8.45014 1.66261C9.05706 1.97009 9.11886 1.97635 10.1825 1.83998C11.5963 1.65865 13.4164 1.65929 14.7213 1.84164C15.7081 1.97954 15.7729 1.97265 16.3813 1.66453C18.3814 0.651679 19.9605 0.71795 20.5323 1.8387C20.8177 2.39812 20.8707 3.84971 20.6494 5.04695C20.5267 5.71069 20.5397 5.79356 20.8353 6.22912C22.915 9.29385 21.4165 14.2616 17.8528 16.1155C17.5801 16.2574 17.3503 16.3452 17.163 16.4167C16.5879 16.6363 16.4133 16.703 16.6247 17.7138C16.7265 18.2 16.8491 19.4088 16.8973 20.4002C16.9844 22.1922 16.9831 22.2047 16.6688 22.5703C16.241 23.0676 15.6244 23.076 15.2066 22.5902C14.9341 22.2734 14.9075 22.1238 14.9075 20.9015C14.9075 19.0952 14.7095 17.8946 14.2417 16.8658C13.6854 15.6415 14.0978 15.185 15.37 14.9114C17.1383 14.531 18.5194 13.4397 19.2892 11.8146C20.0211 10.2698 20.1314 8.13501 18.8082 6.83668C18.4319 6.3895 18.4057 5.98446 18.6744 4.76309C18.7748 4.3066 18.859 3.71768 18.8615 3.45425C18.8653 3.03823 18.8274 2.97541 18.5719 2.97541C18.4102 2.97541 17.7924 3.21062 17.1992 3.49805L16.2524 3.95695C16.1663 3.99866 16.07 4.0147 15.975 4.0038C13.5675 3.72746 11.2799 3.72319 8.86062 4.00488C8.76526 4.01598 8.66853 3.99994 8.58215 3.95802L7.63585 3.49882C7.04259 3.21087 6.42482 2.97541 6.26317 2.97541C5.88941 2.97541 5.88379 3.25135 6.22447 4.89078C6.43258 5.89203 6.57262 6.11513 5.97101 6.91572C5.06925 8.11576 4.844 9.60592 5.32757 11.1716C5.93704 13.1446 7.4295 14.4775 9.52773 14.9222C10.7926 15.1903 11.1232 15.5401 10.6402 16.9905C10.26 18.1319 10.0196 18.4261 9.46707 18.4261C8.72365 18.4261 8.25796 17.7821 8.51424 17.1082C8.62712 16.8112 8.59354 16.7795 7.89711 16.5255C5.77117 15.7504 4.14514 14.0131 3.40172 11.7223C2.82711 9.95184 3.07994 7.64739 4.00175 6.25453C4.31561 5.78028 4.32047 5.74006 4.174 4.83217C4.09113 4.31822 4.04631 3.49103 4.0744 2.9938Z"
+                                                fill="#0F0F0F" />
+                                                <path d="M3.33203 15.9454C3.02568 15.4859 2.40481 15.3617 1.94528 15.6681C1.48576 15.9744 1.36158 16.5953 1.66793 17.0548C1.8941 17.3941 2.16467 17.6728 2.39444 17.9025C2.4368 17.9449 2.47796 17.9858 2.51815 18.0257C2.71062 18.2169 2.88056 18.3857 3.05124 18.5861C3.42875 19.0292 3.80536 19.626 4.0194 20.6962C4.11474 21.1729 4.45739 21.4297 4.64725 21.5419C4.85315 21.6635 5.07812 21.7352 5.26325 21.7819C5.64196 21.8774 6.10169 21.927 6.53799 21.9559C7.01695 21.9877 7.53592 21.998 7.99999 22.0008C8.00033 22.5527 8.44791 23.0001 8.99998 23.0001C9.55227 23.0001 9.99998 22.5524 9.99998 22.0001V21.0001C9.99998 20.4478 9.55227 20.0001 8.99998 20.0001C8.90571 20.0001 8.80372 20.0004 8.69569 20.0008C8.10883 20.0026 7.34388 20.0049 6.67018 19.9603C6.34531 19.9388 6.07825 19.9083 5.88241 19.871C5.58083 18.6871 5.09362 17.8994 4.57373 17.2891C4.34391 17.0194 4.10593 16.7834 3.91236 16.5914C3.87612 16.5555 3.84144 16.5211 3.80865 16.4883C3.5853 16.265 3.4392 16.1062 3.33203 15.9454Z"
+                                                fill="#0F0F0F" />
+                                            </svg>
+                                    </div>
+                                </td>
+                                <td><a href="https://github.com/StudiosServer" title="Studio Server">
+                                    <b>GitHub</b>
+                                    <br>
+                                    <small>
+                              Studio server (Developers)
+                              </small></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class=ic>
+                                        <svg width=20px height=20px viewBox="0 0 128 128" xml:space=preserve xmlns=http://www.w3.org/2000/svg>
+                                            <path d="M64 42c-13.2 0-24 10.8-24 24s10.8 24 24 24 24-10.8 24-24-10.8-24-24-24zm0 40c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM64 100.8c-14.9 0-29.2 6.2-39.4 17.1l-2.7 2.9 5.8 5.5 2.7-2.9c8.8-9.4 20.7-14.6 33.6-14.6s24.8 5.2 33.6 14.6l2.7 2.9 5.8-5.5-2.7-2.9c-10.2-10.8-24.5-17.1-39.4-17.1zM97 47.9v8c9.4 0 18.1 3.8 24.6 10.7l5.8-5.5c-7.8-8.4-18.9-13.2-30.4-13.2zM116.1 20C116.1 9.5 107.5.9 97 .9S77.9 9.5 77.9 20 86.5 39.1 97 39.1s19.1-8.6 19.1-19.1zm-30.2 0c0-6.1 5-11.1 11.1-11.1s11.1 5 11.1 11.1-5 11.1-11.1 11.1-11.1-5-11.1-11.1zM31 47.9C19.5 47.9 8.4 52.7.6 61.1l5.8 5.5c6.4-6.9 15.2-10.7 24.6-10.7v-8zM50.1 20C50.1 9.5 41.5.9 31 .9S11.9 9.5 11.9 20 20.5 39.1 31 39.1 50.1 30.5 50.1 20zM31 31.1c-6.1 0-11.1-5-11.1-11.1S24.9 8.9 31 8.9s11.1 5 11.1 11.1-5 11.1-11.1 11.1z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td><a href="https://whatsapp.com/channel/0029VaKaIemKQuJHXZF6XO0W" title=Community>
+                                    <b>WhatsApp Canal</b>
+                                    <br>
+                                    <small>
+                              Studio Server  Canal
+                              </small></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class=ic>
+                                        <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c2.5 0 4.71.95 6.36 2.5L12 11 5.64 6C7.29 4.45 9.5 3.5 12 3.5zM4 12c0-1.2.26-2.33.72-3.34L12 13l7.28-4.34C19.74 9.67 20 10.8 20 12c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4z"/>
+                                          </svg>                                          
+                                    </div>
+                                </td>
+                                <td><a href="mailto:admin@studioserver.org?subject=Hola Studio Server&body=...Escribe tu mensaje..." title="Customer Support">
+                                    <b>Ayuda</b>
+                                    <br>
+                                    <small>
+                              Email
+                              </small></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class=ic>
+                                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.63605 5.63605C7.19815 4.07395 9.73081 4.07395 11.2929 5.63605L14.1213 8.46448C15.6834 10.0266 15.6834 12.5592 14.1213 14.1213C13.7308 14.5119 13.0976 14.5119 12.7071 14.1213C12.3166 13.7308 12.3166 13.0976 12.7071 12.7071C13.4882 11.9261 13.4882 10.6597 12.7071 9.87869L9.87869 7.05026C9.09764 6.26922 7.83131 6.26922 7.05026 7.05026C6.26922 7.83131 6.26922 9.09764 7.05026 9.87869L7.75737 10.5858C8.1479 10.9763 8.14789 11.6095 7.75737 12C7.36685 12.3905 6.73368 12.3905 6.34316 12L5.63605 11.2929C4.07395 9.73081 4.07395 7.19815 5.63605 5.63605ZM11.2929 9.8787C11.6834 10.2692 11.6834 10.9024 11.2929 11.2929C10.5119 12.074 10.5119 13.3403 11.2929 14.1213L14.1213 16.9498C14.9024 17.7308 16.1687 17.7308 16.9498 16.9498C17.7308 16.1687 17.7308 14.9024 16.9498 14.1213L16.2427 13.4142C15.8521 13.0237 15.8521 12.3905 16.2427 12C16.6332 11.6095 17.2663 11.6095 17.6569 12L18.364 12.7071C19.9261 14.2692 19.9261 16.8019 18.364 18.364C16.8019 19.9261 14.2692 19.9261 12.7071 18.364L9.8787 15.5356C8.3166 13.9735 8.3166 11.4408 9.8787 9.8787C10.2692 9.48817 10.9024 9.48817 11.2929 9.8787Z"
+                                            fill="#000000" />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td><a href="https://studioserver.org" title="Customer Support">
+                                    <b>Página web</b>
+                                    <br>
+                                    <small>
+                              Studio Server
+                              </small></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./informations/animation.js"></script>
+
+    <script>
+        // Función para obtener los datos desde el servidor y actualizar el span
+        async function fetchData() {
+            const response = await fetch('/api/data');
+            const data = await response.json();
+            document.getElementById('rrspedi').textContent = data.api;
+        }
+        
+        // Llamar a la función para obtener los datos cuando se carga la página
+        window.onload = fetchData;
+    </script>
+    <script>
+    // js runtime
+        async function runtime() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('runtime').innerText = data.uptime;
+            } catch (error) {
+            }
+        }
+        setInterval(runtime, 100);
+        window.onload = runtime;
+
+        // js cpu
+        async function cpu() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('cpu').innerText = data.cpu;
+            } catch (error) {
+            }
+        }
+        setInterval(cpu, 500);
+        window.onload = cpu;
+
+        //js ramuse
+        async function RAMuse() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('RAMuse').innerText = data.RAM.use;
+            } catch (error) {
+            }
+        }
+        setInterval(RAMuse, 500);
+        window.onload = RAMuse;
+
+        //js ramtotal
+        async function RAMtotal() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('RAMtotal').innerText = data.RAM.total;
+            } catch (error) {
+            }
+        }
+        setInterval(RAMtotal, 1000);
+        window.onload = RAMtotal;
+
+                //js platform
+                async function platform() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('platform').innerText = data.platform;
+            } catch (error) {
+            }
+        }
+        setInterval(platform, 1000);
+        window.onload = platform;
+
+                //js processor
+                async function processor() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('processor').innerText = data.processor;
+            } catch (error) {
+            }
+        }
+        setInterval(processor, 1000);
+        window.onload = processor;
+
+                //js region
+                async function region() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('region').innerText = data.region;
+            } catch (error) {
+            }
+        }
+        setInterval(region, 1000);
+        window.onload = region;
+
+                //js orders
+                async function orders() {
+            try {
+                const response = await fetch('/system');
+                const data = await response.json();
+                document.getElementById('rrspedi').innerText = data.orders;
+            } catch (error) {
+            }
+        }
+        setInterval(orders, 900);
+        window.onload = orders;
+
+        // Función para limpiar la consola y mostrar 
+        
+// Array para almacenar los errores de la consola
+const consoleErrors = [];
+
+// Sobrescribir la función console.error para capturar errores
+const originalConsoleError = console.error;
+console.error = function(...args) {
+    consoleErrors.push(args);
+    originalConsoleError.apply(console, args);
+};
+
+// Función para limpiar la consola y mostrar un mensaje
+function cleanConsoleIfErrors() {
+    if (consoleErrors.length > 0) {
+        console.clear();
+        consoleErrors.length = 0; // Vaciar el array de errores
+    }
+}
+console.clear()
+
+// Configurar el intervalo para limpiar la consola solo cuando haya errores (por ejemplo, cada 10 segundos)
+setInterval(cleanConsoleIfErrors, 1000);
+
+
+    </script>
+
+<script>
+    function actualizarFecha() {
+const hoy = new Date();
+const dia = hoy.getDate();
+const mes = hoy.getMonth() + 1; // Los meses son de 0 a 11
+const año = hoy.getFullYear();
+const fechaActual = `${mes}/${dia}/${año}`;
+
+document.getElementById('currentDateTime').textContent = fechaActual;
+}
+
+async function obtenerDatosSistema() {
+    try {
+        const response = await fetch('/system');
+        const data = await response.json();
+
+        // Actualizar el contenido del elemento con id 'tokyo-time' con la fecha y hora de Tokio
+        document.getElementById('lastVisitorTime').textContent = data.Server.date;
+    } catch (error) {
+        console.error('Error al obtener los datos del sistema:', error);
+    }
+}
+// Llama a la función para actualizar la fecha al cargar la página
+window.onload = function (){
+    actualizarFecha();
+    obtenerDatosSistema();
+}
+
+</script>
+
+</body>
+    
+</body>
+
+</html>
