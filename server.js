@@ -144,8 +144,8 @@ const iacelebrityRoute = require('./routes/ia/celebrity');
 const iaalenaRoute = require('./routes/ia/alena');
 
 // valor ia image
-const iaiaimageRoute = require('./routes/iaimage/iaimage');
-const iaimagesearchgeRoute = require('./routes/iaimage/imagesearch');
+const iaimageaniRoute = require('./routes/iaimage/imageani');
+const iaimagevretRoute = require('./routes/iaimage/imagevret');
 
 //valor tools
 const toolsiaimageRoute = require('./routes/tools/iaimage');
@@ -370,8 +370,8 @@ app.use('/', iacelebrityRoute);
 app.use('/', iaalenaRoute);
 
 //app use ia image
-app.use('/', iaiaimageRoute);
-app.use('/', iaimagesearchgeRoute);
+app.use('/', iaimageaniRoute);
+app.use('/', iaimagevretRoute);
 
 // app use tools
 app.use('/', toolsiaimageRoute);

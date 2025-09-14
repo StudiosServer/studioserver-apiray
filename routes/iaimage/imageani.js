@@ -4,13 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 const router = express.Router();
+const IMAGE_PATH = path.join(__dirname, '../tempdata/iaimage.png');
 
-// Ruta que recibe solicitudes en GET y genera imagen con la API de magicstudio
-router.get('/tools/iaimage', async (req, res) => {
-    const query = req.query.query; // Recibir la entrada del usuario en GET
+// Ruta para generar imagen IA basada en un prompt recibido en query
+router.get('/iaimage/imageani', async (req, res) => {
+    const { query } = req.query;
 
     if (!query) {
-        return res.status(400).json({ error: 'Se requiere un texto de entrada (query).' });
+        return res.status(400).json({ error: 'Debes proporcionar un valor en query. Ejemplo: /iaimage/iaimage?query=un paisaje futurista' });
     }
 
     try {
@@ -34,12 +35,11 @@ router.get('/tools/iaimage', async (req, res) => {
         }
 
         // Guardar la imagen recibida
-        const imagePath = path.join(__dirname, 'tempdata', 'iaimage.png');
-        fs.writeFileSync(imagePath, imageResponse.data);
+        fs.writeFileSync(IMAGE_PATH, imageResponse.data);
 
         // Responder con la imagen guardada
         res.setHeader('Content-Type', contentType);
-        res.sendFile(imagePath);
+        res.sendFile(IMAGE_PATH);
         
         // Ejecutar la validación secundaria en segundo plano
         setImmediate(() => {
@@ -48,7 +48,7 @@ router.get('/tools/iaimage', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error al generar la imagen:', error);
+        console.error('Error en el proceso:', error);
         
         // Si el error es de timeout o red, dar un mensaje más específico
         if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {

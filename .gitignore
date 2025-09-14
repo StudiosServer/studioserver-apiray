@@ -1,7 +1,6 @@
 node_modules
 /data
 servermule.js
-/.config
-/.local
-/.upm
-/.binari_server
+.config
+.local
+.upm
