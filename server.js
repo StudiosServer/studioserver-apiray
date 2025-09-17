@@ -1,9 +1,18 @@
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
 
 
@@ -48,8 +57,12 @@ function saveApiKey(apiKey) {
 
 
 // rutas system 
-const systemRoutes = require('./routes/system/system');
+const { router: systemRoutes, setSocketIO, startSystemDataEmission, getSystemData } = require("./routes/system/system");
 const activatorRoutes = require('./routes/system/activator');
+
+// Configurar Socket.IO en el sistema
+setSocketIO(io);
+startSystemDataEmission();
 
 // rutas archivos
 const filesRoutes = require('./routes/tools/files');
@@ -524,6 +537,18 @@ app.use((req, res, next) => {
 });
 
 
-app.listen(5000, '0.0.0.0', () => {
+// Configuración de Socket.IO para enviar datos del sistema
+io.on('connection', (socket) => {
+    console.log('Cliente conectado:', socket.id);
+    
+    socket.on('disconnect', () => {
+        console.log('Cliente desconectado:', socket.id);
+    });
+});
+
+server.listen(5000, '0.0.0.0', () => {
     console.log(`Servidor activo en puerto 5000`);
 });
+
+// Exportar io para usar en otras rutas
+module.exports = { app, io };

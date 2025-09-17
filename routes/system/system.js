@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios'); // Asegúrate de tener instalado el paquete axios
 
+let io; // Variable para almacenar la instancia de Socket.IO
+
+// Función para configurar la instancia de Socket.IO
+function setSocketIO(socketIO) {
+    io = socketIO;
+}
+
 // Variables para el tiempo de inicio
 let startTime = Date.now();
 let incrementSpeed = 80; // Velocidad inicial de incremento en ms
@@ -60,18 +67,28 @@ setInterval(async () => {
 
 // Función para obtener la hora actual en Tokio desde la API de TimeAPI.io
 async function getTokyoTime() {
-    const response = await axios.get('https://timeapi.io/api/time/current/zone?timeZone=Asia/Tokyo');
-    return response.data;
+    try {
+        const response = await axios.get('https://timeapi.io/api/time/current/zone?timeZone=Asia/Tokyo');
+        return response.data;
+    } catch (error) {
+        console.error('Error obteniendo hora de Tokyo:', error.message);
+        // Devolver datos locales como fallback
+        return {
+            dateTime: new Date().toISOString(),
+            timeZone: 'Asia/Tokyo',
+            fallback: true
+        };
+    }
 }
 
-// Ruta para obtener el tiempo activo en JSON
-router.get('/system', async (req, res) => {
+// Función para obtener los datos del sistema
+async function getSystemData() {
     const uptime = getUptime();
     const cpuUsage = getCpuUsage();
     const ramUsage = getRamUsage();
     const tokyoTimeData = await getTokyoTime();
     
-    res.json({
+    return {
         creator: 'Studio Server',
         status: true,
         uptime: uptime,
@@ -82,7 +99,26 @@ router.get('/system', async (req, res) => {
         region: region,
         orders: orders,
         Server: tokyoTimeData
-    });
-});
+    };
+}
 
-module.exports = router;
+// La ruta /system ha sido eliminada - ahora solo se usan sockets
+
+// Función para emitir datos del sistema periódicamente por socket
+function startSystemDataEmission() {
+    if (!io) {
+        console.log('Socket.IO no está configurado para emitir datos del sistema');
+        return;
+    }
+    
+    setInterval(async () => {
+        try {
+            const systemData = await getSystemData();
+            io.emit('systemData', systemData);
+        } catch (error) {
+            console.error('Error emitiendo datos del sistema:', error);
+        }
+    }, 5000); // Emitir cada 5 segundos
+}
+
+module.exports = { router, setSocketIO, startSystemDataEmission, getSystemData };

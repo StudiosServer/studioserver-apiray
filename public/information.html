@@ -68,7 +68,8 @@
     <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel=stylesheet>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./informations/script.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="./informations/socket-client.js"></script>
     <link rel="stylesheet" href="./informations/style1.css">
     <style>
         .dropdown-menu__labels {
@@ -335,10 +336,10 @@
                                     </div>
                                 </td>
                                 <td><a href="https://whatsapp.com/channel/0029VaKaIemKQuJHXZF6XO0W" title=Community>
-                                    <b>WhatsApp Canal</b>
+                                    <b>WhatsApp Chanel</b>
                                     <br>
                                     <small>
-                              Studio Server  Canal
+                              Studio Server  Chanel
                               </small></a>
                                 </td>
                             </tr>
@@ -351,7 +352,7 @@
                                     </div>
                                 </td>
                                 <td><a href="mailto:admin@studioserver.org?subject=Hola Studio Server&body=...Escribe tu mensaje..." title="Customer Support">
-                                    <b>Ayuda</b>
+                                    <b>Help</b>
                                     <br>
                                     <small>
                               Email
@@ -368,7 +369,7 @@
                                     </div>
                                 </td>
                                 <td><a href="https://studioserver.org" title="Customer Support">
-                                    <b>Página web</b>
+                                    <b>Web page</b>
                                     <br>
                                     <small>
                               Studio Server
@@ -383,170 +384,6 @@
     </div>
     <script src="./informations/animation.js"></script>
 
-    <script>
-        // Función para obtener los datos desde el servidor y actualizar el span
-        async function fetchData() {
-            const response = await fetch('/api/data');
-            const data = await response.json();
-            document.getElementById('rrspedi').textContent = data.api;
-        }
-        
-        // Llamar a la función para obtener los datos cuando se carga la página
-        window.onload = fetchData;
-    </script>
-    <script>
-    // js runtime
-        async function runtime() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('runtime').innerText = data.uptime;
-            } catch (error) {
-            }
-        }
-        setInterval(runtime, 100);
-        window.onload = runtime;
-
-        // js cpu
-        async function cpu() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('cpu').innerText = data.cpu;
-            } catch (error) {
-            }
-        }
-        setInterval(cpu, 500);
-        window.onload = cpu;
-
-        //js ramuse
-        async function RAMuse() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('RAMuse').innerText = data.RAM.use;
-            } catch (error) {
-            }
-        }
-        setInterval(RAMuse, 500);
-        window.onload = RAMuse;
-
-        //js ramtotal
-        async function RAMtotal() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('RAMtotal').innerText = data.RAM.total;
-            } catch (error) {
-            }
-        }
-        setInterval(RAMtotal, 1000);
-        window.onload = RAMtotal;
-
-                //js platform
-                async function platform() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('platform').innerText = data.platform;
-            } catch (error) {
-            }
-        }
-        setInterval(platform, 1000);
-        window.onload = platform;
-
-                //js processor
-                async function processor() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('processor').innerText = data.processor;
-            } catch (error) {
-            }
-        }
-        setInterval(processor, 1000);
-        window.onload = processor;
-
-                //js region
-                async function region() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('region').innerText = data.region;
-            } catch (error) {
-            }
-        }
-        setInterval(region, 1000);
-        window.onload = region;
-
-                //js orders
-                async function orders() {
-            try {
-                const response = await fetch('/system');
-                const data = await response.json();
-                document.getElementById('rrspedi').innerText = data.orders;
-            } catch (error) {
-            }
-        }
-        setInterval(orders, 900);
-        window.onload = orders;
-
-        // Función para limpiar la consola y mostrar 
-        
-// Array para almacenar los errores de la consola
-const consoleErrors = [];
-
-// Sobrescribir la función console.error para capturar errores
-const originalConsoleError = console.error;
-console.error = function(...args) {
-    consoleErrors.push(args);
-    originalConsoleError.apply(console, args);
-};
-
-// Función para limpiar la consola y mostrar un mensaje
-function cleanConsoleIfErrors() {
-    if (consoleErrors.length > 0) {
-        console.clear();
-        consoleErrors.length = 0; // Vaciar el array de errores
-    }
-}
-console.clear()
-
-// Configurar el intervalo para limpiar la consola solo cuando haya errores (por ejemplo, cada 10 segundos)
-setInterval(cleanConsoleIfErrors, 1000);
-
-
-    </script>
-
-<script>
-    function actualizarFecha() {
-const hoy = new Date();
-const dia = hoy.getDate();
-const mes = hoy.getMonth() + 1; // Los meses son de 0 a 11
-const año = hoy.getFullYear();
-const fechaActual = `${mes}/${dia}/${año}`;
-
-document.getElementById('currentDateTime').textContent = fechaActual;
-}
-
-async function obtenerDatosSistema() {
-    try {
-        const response = await fetch('/system');
-        const data = await response.json();
-
-        // Actualizar el contenido del elemento con id 'tokyo-time' con la fecha y hora de Tokio
-        document.getElementById('lastVisitorTime').textContent = data.Server.date;
-    } catch (error) {
-        console.error('Error al obtener los datos del sistema:', error);
-    }
-}
-// Llama a la función para actualizar la fecha al cargar la página
-window.onload = function (){
-    actualizarFecha();
-    obtenerDatosSistema();
-}
-
-</script>
 
 </body>
     
