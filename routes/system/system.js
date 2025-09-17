@@ -118,7 +118,7 @@ function startSystemDataEmission() {
         } catch (error) {
             console.error('Error emitiendo datos del sistema:', error);
         }
-    }, 5000); // Emitir cada 5 segundos
+    }, 50); // Emitir cada 1 segundo
 }
 
 module.exports = { router, setSocketIO, startSystemDataEmission, getSystemData };
