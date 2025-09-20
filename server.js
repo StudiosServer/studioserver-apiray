@@ -19,6 +19,7 @@ const io = socketIo(server, {
 
 // Middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // Soporte para JSON
 
 // Route to serve home.html at root path
 app.get('/', (req, res) => {

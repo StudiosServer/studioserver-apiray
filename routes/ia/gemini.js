@@ -24,12 +24,33 @@ async function queryGemini(query) {
     return data;
 }
 
-router.get('/ia/gemini', async (req, res) => {
-    const query = req.query.query;
+router.post('/ia/gemini', async (req, res) => {
+    const messaje = req.body.messaje;
+    const prompt = req.body.prompt;
+    
+    // Validar que el campo 'messaje' esté presente
+    if (!messaje || messaje.trim() === '') {
+        return res.status(400).json({
+            creator: 'Studio Server',
+            status: false,
+            error: 'El campo "messaje" es requerido y no puede estar vacío'
+        });
+    }
+    
+    // Combinar el prompt del sistema con el mensaje del usuario
+    let finalQuery;
+    if (prompt && prompt.trim() !== '') {
+        finalQuery = `${prompt.trim()}
+
+Ahora responde a la siguiente consulta respetando las reglas anteriores:
+${messaje.trim()}`;
+    } else {
+        finalQuery = messaje.trim();
+    }
 
     try {
         // Realiza la consulta a la API de Gemini
-        const geminiResponse = await queryGemini(query);
+        const geminiResponse = await queryGemini(finalQuery);
         
         // Obtiene el texto de la respuesta de Gemini
         const geminiText = geminiResponse.candidates[0].content.parts[0].text;
@@ -44,8 +65,14 @@ router.get('/ia/gemini', async (req, res) => {
         setImmediate(() => {
             const trackingURL = `https://studioservercounterapimax.onrender.com/use`;
             axios.get(trackingURL)
-        });} catch (error) {
-        res.status(500).json({ status: false });
+        });
+    } catch (error) {
+        console.error('Error en Gemini API:', error.message);
+        res.status(500).json({ 
+            creator: 'Studio Server',
+            status: false,
+            error: 'Error interno del servidor al procesar la consulta'
+        });
     }
 });
 
